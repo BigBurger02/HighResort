@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
 
+
 namespace API.Data
 {
     public class APIContext : DbContext
@@ -15,6 +16,7 @@ namespace API.Data
         }
 
         public DbSet<API.Models.Room> Room { get; set; } = default!;
-        public DbSet<API.Models.Reservations> Reservation { get; set; } = default!;
+        public DbSet<API.Models.Reservations> Reservations { get; set; } = default!;
+
     }
 }

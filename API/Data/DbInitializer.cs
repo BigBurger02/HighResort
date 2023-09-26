@@ -41,15 +41,27 @@ public static class DbInitializer
                 RoomId = 1, 
                 CheckInDate = new DateTime(2023, 5, 15), 
                 CheckOutDate = new DateTime(2023, 5, 15), 
-                ReservationDate = new DateTime(2023, 5, 15), 
+                ReservationDate = new DateTime(2023, 5, 15, 15, 11, 56), 
                 TotalPrice = 200, 
+                ReservationStatus = ReservationStatus.Pending, 
+                PaymentStatus = PaymentStatus.NotPaid,
+            },
+            new Reservations
+            {
+                Id = 2, 
+                CustomerId = 2, 
+                RoomId = 2, 
+                CheckInDate = new DateTime(2023, 5, 15), 
+                CheckOutDate = new DateTime(2023, 5, 15), 
+                ReservationDate = new DateTime(2023, 5, 15, 15, 11, 56), 
+                TotalPrice = 400, 
                 ReservationStatus = ReservationStatus.Pending, 
                 PaymentStatus = PaymentStatus.NotPaid,
             },
         };
         foreach (var item in reservations)
         {
-            context.Reservation.Add(item);
+            context.Reservations.Add(item);
         }
         context.SaveChanges();
     }

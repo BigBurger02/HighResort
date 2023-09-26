@@ -17,3 +17,6 @@ This is pet project where will be realized functionality of Hotel in the mountai
 - : Pay, confirmation, decline
 ### CancelBooking
 
+## Plan
+- message-broker (ex: RabbitMQ)
+- Transactions

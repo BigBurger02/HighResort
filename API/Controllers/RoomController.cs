@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 using API.Data;
+using API.Interfaces;
 using API.Models;
 
 namespace API.Controllers
@@ -14,40 +10,35 @@ namespace API.Controllers
     [ApiController]
     public class RoomController : ControllerBase
     {
-        private readonly APIContext _context;
+        private readonly IRepository _repo;
 
-        public RoomController(APIContext context)
+        public RoomController(IRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
         // GET: api/Room
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Room>>> GetRoom()
+        public ActionResult<IEnumerable<Room>> GetRoom()
         {
-            if (_context.Room == null)
+            var rooms = _repo.GetAllRooms();
+            if (rooms == null)
             {
                 return NotFound();
             }
-            return await _context.Room.ToListAsync();
+            return new ObjectResult(rooms) { StatusCode = 200 };
         }
 
         // GET: api/Room/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Room>> GetRoom(int id)
         {
-            if (_context.Room == null)
-            {
-                return NotFound();
-            }
-            var room = await _context.Room.FindAsync(id);
-
+            var room = await _repo.GetRoomAsync(id);
             if (room == null)
             {
                 return NotFound();
             }
-
-            return room;
+            return new ObjectResult(room) { StatusCode = 200 };;
         }
 
         // PUT: api/Room/5
@@ -60,24 +51,15 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(room).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _repo.UpdateRoom(room);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (KeyNotFoundException)
             {
-                if (!RoomExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
-
+            
             return NoContent();
         }
 
@@ -86,12 +68,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Room>> PostRoom(Room room)
         {
-          if (_context.Room == null)
-          {
-              return Problem("Entity set 'APIContext.Room'  is null.");
-          }
-            _context.Room.Add(room);
-            await _context.SaveChangesAsync();
+            _repo.CreateRoom(room);
 
             return CreatedAtAction("GetRoom", new { id = room.Id }, room);
         }
@@ -100,25 +77,12 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
-            if (_context.Room == null)
+            if (await _repo.DeleteRoom(id) == false)
             {
                 return NotFound();
             }
-            var room = await _context.Room.FindAsync(id);
-            if (room == null)
-            {
-                return NotFound();
-            }
-
-            _context.Room.Remove(room);
-            await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool RoomExists(int id)
-        {
-            return (_context.Room?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
