@@ -9,6 +9,8 @@ public class Reservations
     public DateTime CheckOutDate { get; set; }
     public DateTime ReservationDate { get; set; }
     public Decimal TotalPrice { get; set; }
-    public ReservationStatus ReservationStatus { get; set; }
-    public PaymentStatus PaymentStatus { get; set; }
+    public bool ReservationReviewed { get; set; }
+    public bool ReservationConfirmed { get; set; }
+    public bool ReservationCanceled { get; set; }
+    public bool ReservationPaid { get; set; }
 }

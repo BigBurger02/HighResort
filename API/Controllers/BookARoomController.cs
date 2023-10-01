@@ -1,20 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 
+using API.Interfaces;
+
 namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class BookARoomController : ControllerBase
 {
-    [HttpGet]
-    public string Get1()
+    private readonly IRepository _repo;
+    
+    public BookARoomController(IRepository repo)
     {
-        return "1";
+        _repo = repo;
     }
     
-    [HttpPost]
-    public string Get2()
+    [HttpGet]
+    public IActionResult GetFreeRooms(DateTime checkIn, DateTime checkOut, [FromQuery]IEnumerable<string>? names, int capacity)
     {
-        return "2";
+        var query = _repo.GetFreeRooms(checkIn, checkOut, names, capacity);
+        
+        return new ObjectResult(query) { StatusCode = 200 };
     }
 }

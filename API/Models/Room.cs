@@ -8,4 +8,5 @@ public class Room
     [Required]
     public string Name { get; set; } = String.Empty;
     public int Capacity { get; set; }
+    public int Price { get; set; }
 }
