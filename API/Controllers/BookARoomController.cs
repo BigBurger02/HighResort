@@ -8,17 +8,19 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class BookARoomController : ControllerBase
 {
-    private readonly IRepository _repo;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ICustomRepository _customRepository;
     
-    public BookARoomController(IRepository repo)
+    public BookARoomController(IUnitOfWork unitOfWork)
     {
-        _repo = repo;
+        _unitOfWork = unitOfWork;
+        _customRepository = _unitOfWork.GetCustomRepository();
     }
     
     [HttpGet]
     public IActionResult GetFreeRooms(DateTime checkIn, DateTime checkOut, [FromQuery]IEnumerable<string>? names, int capacity)
     {
-        var query = _repo.GetFreeRooms(checkIn, checkOut, names, capacity);
+        var query = _customRepository.GetFreeRooms(checkIn, checkOut, names, capacity);
         
         return new ObjectResult(query) { StatusCode = 200 };
     }

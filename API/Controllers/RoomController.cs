@@ -10,18 +10,20 @@ namespace API.Controllers
     [ApiController]
     public class RoomController : ControllerBase
     {
-        private readonly IRepository _repo;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICrudGenericRepository<Room> _roomCrudGenericRepository;
 
-        public RoomController(IRepository repo)
+        public RoomController(IUnitOfWork unitOfWork)
         {
-            _repo = repo;
+            _unitOfWork = unitOfWork;
+            _roomCrudGenericRepository = _unitOfWork.GetCrudGenericRepository<Room>();
         }
 
         // GET: api/Room
         [HttpGet]
         public ActionResult<IEnumerable<Room>> GetRoom()
         {
-            var rooms = _repo.GetAllRooms();
+            var rooms = _roomCrudGenericRepository.GetAll();
             if (rooms == null)
             {
                 return NotFound();
@@ -33,32 +35,26 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Room>> GetRoom(int id)
         {
-            var room = await _repo.GetRoomAsync(id);
+            var room = await _roomCrudGenericRepository.GetByIdAsync(id);
             if (room == null)
             {
                 return NotFound();
             }
-            return new ObjectResult(room) { StatusCode = 200 };;
+            return new ObjectResult(room) { StatusCode = 200 };
         }
 
         // PUT: api/Room/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoom(int id, Room room)
+        public IActionResult PutRoom(int id, Room room)
         {
             if (id != room.Id)
             {
                 return BadRequest();
             }
-
-            try
-            {
-                _repo.UpdateRoom(room);
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
+            
+            _roomCrudGenericRepository.Update(room);
+            _unitOfWork.CommitAsync();
             
             return NoContent();
         }
@@ -66,9 +62,10 @@ namespace API.Controllers
         // POST: api/Room
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Room>> PostRoom(Room room)
+        public ActionResult<Room> PostRoom(Room room)
         {
-            _repo.CreateRoom(room);
+            _roomCrudGenericRepository.CreateAsync(room);
+            _unitOfWork.CommitAsync();
 
             return CreatedAtAction("GetRoom", new { id = room.Id }, room);
         }
@@ -77,10 +74,14 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
-            if (await _repo.DeleteRoom(id) == false)
+            var room = await _roomCrudGenericRepository.GetByIdAsync(id);
+            if (room == null)
             {
                 return NotFound();
             }
+            
+            _roomCrudGenericRepository.Delete(room);
+            _unitOfWork.CommitAsync();
 
             return NoContent();
         }
