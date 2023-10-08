@@ -33,7 +33,7 @@ namespace API.Controllers
 
         // GET: api/Room/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Room>> GetRoom(int id)
+        public async Task<ActionResult<Room>> GetRooms(int id)
         {
             var room = await _roomCrudGenericRepository.GetByIdAsync(id);
             if (room == null)

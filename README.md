@@ -1,6 +1,4 @@
-# Scratch
-- не полное удаление из бд (soft delete)
-- phone number to reservations table
+
 
 # High Resort
 This is pet project where will be realized functionality of Hotel in the mountains.

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{03515AAE-661C-48C4-8179-74BFDE6E2DC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientOld", "ClientOld\ClientOld.csproj", "{03515AAE-661C-48C4-8179-74BFDE6E2DC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{86F46153-4DF5-4E24-A789-A9D25C81A770}"
 EndProject
