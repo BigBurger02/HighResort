@@ -3,8 +3,7 @@ import {RoomsService} from "../../services/rooms.service";
 
 @Component({
   selector: 'app-room-page',
-  templateUrl: './room-page.component.html',
-  styleUrls: ['./room-page.component.scss']
+  templateUrl: './room-page.component.html'
 })
 export class RoomPageComponent {
   title = 'Client'

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-reservations-page',
-  templateUrl: './reservations-page.component.html',
-  styleUrls: ['./reservations-page.component.scss']
+  templateUrl: './reservations-page.component.html'
 })
 export class ReservationsPageComponent {
 
