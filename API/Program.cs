@@ -8,13 +8,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<APIContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("APIContext") ?? throw new InvalidOperationException("Connection string 'APIContext' not found.")));
-builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CORS", corsPolicyBuilder => corsPolicyBuilder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+    );
+});
 
 var app = builder.Build();
 
@@ -40,6 +49,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CORS");
 
 app.UseAuthorization();
 
