@@ -8,4 +8,5 @@ public interface ICustomRepository
     bool CheckIfRoomFree(DateTime checkIn, DateTime checkOut, int id);
     decimal GetTotalPrice(int reservationId);
     void ReservationPaid(int reservationId);
+    int GetRoomImageId(int roomId);
 }
