@@ -18,7 +18,7 @@ export class RoomsService {
   getAll(): Observable<IRoom[]>{
     return this.http.get<IRoom[]>('https://localhost:7112/api/Room')
       .pipe(
-        delay(2000),
+        delay(200),
         retry(2),
         tap(rooms => this.rooms = rooms),
         catchError(this.errorHandler.bind(this))

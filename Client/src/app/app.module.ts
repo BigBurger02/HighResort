@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {RoomComponent} from "./components/room/room.component";
 import {HttpClientModule} from "@angular/common/http";
 import { GlobalErrorComponent } from './components/global-error/global-error.component';
 import { RoomPageComponent } from './pages/room-page/room-page.component';
@@ -15,7 +14,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
-    RoomComponent,
     GlobalErrorComponent,
     RoomPageComponent,
     ReservationsPageComponent,

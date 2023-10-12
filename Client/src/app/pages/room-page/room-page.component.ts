@@ -6,11 +6,6 @@ import {RoomsService} from "../../services/rooms.service";
   templateUrl: './room-page.component.html'
 })
 export class RoomPageComponent {
-  title = 'Client'
-
-  //rooms: IRoom[] = []
-
-
   loading = false
 
   constructor(public roomsService: RoomsService) {
