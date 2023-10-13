@@ -10,6 +10,7 @@ import { ReservationsPageComponent } from './pages/reservations-page/reservation
 import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SpecificRoomComponent } from './components/specific-room/specific-room.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     ReservationsPageComponent,
     HomeComponent,
     NavigationComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SpecificRoomComponent
   ],
   imports: [
     BrowserModule,

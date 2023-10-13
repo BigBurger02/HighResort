@@ -7,6 +7,7 @@ import {RoomsService} from "../../services/rooms.service";
 })
 export class RoomPageComponent {
   loading = false
+  roomToShow: number = -1; // -1: show all
 
   constructor(public roomsService: RoomsService) {
   }
