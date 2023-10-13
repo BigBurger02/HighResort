@@ -2,22 +2,28 @@
   <p *ngIf="loading" class="text-center text-lg">Loading...</p>
 
   <div
-    *ngFor="let room of roomsService.rooms"
+    *ngFor="let room of roomsService.structuredRooms"
     class="border rounded-2xl flex items-center mb-2 justify-between bg-gray-200"
   >
     <div class="w-[48%] box-border p-4">
-      <img src="https://localhost:7112/api/Image?roomId={{ room.id }}" alt="room_photo" class="rounded-2xl">
+      <img src="https://localhost:7112/api/Image?roomId={{ room.room[0].id }}" alt="room_photo" class="rounded-2xl">
     </div>
     <div class="w-[48%] box-border p-4">
       <h2 class="mb-6 text-2xl text-center text-gray-600">{{ room.name }}</h2>
-      <div class="columns-2 gap-6 mx-12">
-        <div>
+      <div class="columns-2 gap-6 mx-12 text-gray-700 text-md">
+        <div class="text-right">
           <p>Capacity:</p>
           <p>Price:</p>
         </div>
         <div>
-          <p>{{ room.capacity }}</p>
-          <p><span class="font-bold">{{ room.price | currency }}</span></p>
+          <p *ngIf="room.minCapacity != room.maxCapacity">{{ room.minCapacity }} - {{ room.maxCapacity }}</p>
+          <p *ngIf="room.minCapacity == room.maxCapacity">{{ room.minCapacity }}</p>
+          <p *ngIf="room.minPrice != room.maxPrice">
+            <span class="font-bold">{{ room.minPrice | currency }} - {{ room.maxPrice | currency }}</span>
+          </p>
+          <p *ngIf="room.minPrice == room.maxPrice">
+            <span class="font-bold">{{ room.minPrice | currency }}</span>
+          </p>
         </div>
       </div>
     </div>
