@@ -14,7 +14,6 @@ import { SpecificRoomComponent } from './components/specific-room/specific-room.
 import {FormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import { FilterRoomsComponent } from './components/filter-rooms/filter-rooms.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +24,7 @@ import { FilterRoomsComponent } from './components/filter-rooms/filter-rooms.com
     HomeComponent,
     NavigationComponent,
     NotFoundComponent,
-    SpecificRoomComponent,
-    FilterRoomsComponent
+    SpecificRoomComponent
   ],
   imports: [
     BrowserModule,

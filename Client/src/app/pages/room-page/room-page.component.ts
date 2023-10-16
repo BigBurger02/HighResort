@@ -4,15 +4,7 @@ import {DatePipe} from '@angular/common';
 import {FormsModule} from "@angular/forms";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ThemePalette} from "@angular/material/core";
-
-// EXAMPLE:
-export interface Task {
-  name: string;
-  completed: boolean;
-  subtasks?: Task[];
-}
-
-// EXAMPLE
+import {CheckBox} from "../../models/CheckBox";
 
 @Component({
   selector: 'app-room-page',
@@ -29,7 +21,11 @@ export class RoomPageComponent {
   namesFilter: string[]
 
   // Room type MatCheckboxModule:
-  task: Task
+  task: CheckBox = {
+    name: 'All',
+    completed: false,
+    subtasks: [],
+  };
   allComplete: boolean = false;
 
   get formattedCheckIn() {
@@ -55,6 +51,11 @@ export class RoomPageComponent {
   }
 
   constructor(public roomsService: RoomsService, private datePipe: DatePipe) {
+    this.roomsService.getRoomTypes().subscribe(() => {
+      for (let item of this.roomsService.roomNames) {
+        this.task.subtasks?.push({name: item, completed: false})
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -63,30 +64,20 @@ export class RoomPageComponent {
     this.roomsService.roomNames = []
     this.roomsService.structuredRooms = []
     this.roomsService.roomNames = []
-    this.task = {
-      name: 'All',
-      completed: true,
-      subtasks: [],
-    };
 
-    this.loading = true
 
-    this.roomsService.getRoomTypes().subscribe(() => {
-      for (let item of this.roomsService.roomNames) {
-        this.task.subtasks?.push({name: item, completed: true})
-      }
-    })
-
+    // console.log(this.task.subtasks?.length)
     this.namesFilter = []
-    if (this.task.subtasks != undefined) {
+    if (this.task.subtasks != undefined && this.task.subtasks.length != 0) {
       this.task.subtasks.forEach(t => {
         if (t.completed) {
           this.namesFilter.push(t.name)
         }
       })
     }
+    console.log('NAMES:', this.namesFilter)
 
-
+    this.loading = true
     // this.rooms$ = this.roomsService.getAll().pipe(
     //   tap(() => this.loading = false)
     // )
