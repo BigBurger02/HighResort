@@ -85,7 +85,7 @@ export class RoomPageComponent {
         }
       })
     }
-    console.log(this.task.subtasks)
+
 
     // this.rooms$ = this.roomsService.getAll().pipe(
     //   tap(() => this.loading = false)

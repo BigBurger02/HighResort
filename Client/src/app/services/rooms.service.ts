@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {catchError, delay, find, findIndex, Observable, retry, tap, throwError} from "rxjs";
-import {IRoom} from "../models/IRoom";
 import {ErrorService} from "./error.service";
 import { StructuredRoom } from "../models/StructuredRoom";
 import { Room } from "../models/Room";
@@ -21,7 +20,7 @@ export class RoomsService {
   structuredRooms: StructuredRoom[] = []
   roomNames: string[] = []
 
-  getAll(checkIn: Date, checkOut: Date, capacity: number, names: string[]): Observable<IRoom[]> {
+  getAll(checkIn: Date, checkOut: Date, capacity: number, names: string[]): Observable<Room[]> {
     let queryString: string = ''
     if (checkIn != undefined)
     {
