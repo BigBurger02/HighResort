@@ -11,6 +11,9 @@ import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SpecificRoomComponent } from './components/specific-room/specific-room.component';
+import {FormsModule} from "@angular/forms";
+import {DatePipe} from "@angular/common";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -26,9 +29,11 @@ import { SpecificRoomComponent } from './components/specific-room/specific-room.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    MatCheckboxModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

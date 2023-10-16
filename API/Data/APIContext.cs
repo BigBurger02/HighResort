@@ -16,7 +16,7 @@ namespace API.Data
         }
 
         public DbSet<API.Models.Room> Room { get; set; } = default!;
+        public DbSet<API.Models.RoomType> RoomType { get; set; } = default!;
         public DbSet<API.Models.Reservations> Reservations { get; set; } = default!;
-
     }
 }

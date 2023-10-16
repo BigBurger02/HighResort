@@ -6,7 +6,7 @@ using API.Models;
 namespace API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class BookARoomController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;

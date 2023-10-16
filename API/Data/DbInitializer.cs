@@ -42,6 +42,21 @@ public static class DbInitializer
         }
         context.SaveChanges();
 
+        var roomTypes = new[]
+        {
+            new RoomType() { Id = 1, Name = "Cosy" },
+            new RoomType() { Id = 2, Name = "Cream" },
+            new RoomType() { Id = 3, Name = "Light" },
+            new RoomType() { Id = 4, Name = "Minimalistic" },
+            new RoomType() { Id = 5, Name = "OakForest" },
+            new RoomType() { Id = 6, Name = "Panoramic" },
+        };
+        foreach (var item in roomTypes)
+        {
+            context.RoomType.Add(item);
+        }
+        context.SaveChanges();
+
         var reservations = new[]
         {
             new Reservations
