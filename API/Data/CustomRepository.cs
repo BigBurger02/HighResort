@@ -80,4 +80,15 @@ public class CustomRepository : ICustomRepository
         var reservation = _context.Reservations.Find(reservationId);
         reservation.ReservationPaid = true;
     }
+
+    public int GetRoomImageId(int roomId)
+    {
+        var room = _context.Room.Find(roomId);
+        if (room == null)
+        {
+            return 0;
+        }
+
+        return room.ImageId;
+    }
 }

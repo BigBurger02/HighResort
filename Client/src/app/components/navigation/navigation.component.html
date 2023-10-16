@@ -1,11 +1,14 @@
-<nav class="absolute top-0 right-0 left-0 px-5 h-[50px] flex justify-between items-center text-white bg-gray-500">
-
-  <h1 class="font-bold">HighResort</h1>
-
-  <span>
-    <a routerLink="/" routerLinkActive="text-black" class="mr-2">Home</a>
-    <a routerLink="/rooms" class="mr-2">Rooms</a>
-    <a routerLink="/reservations" class="mr-2">Reservations</a>
-  </span>
-
+<nav
+  class="sticky z-30 top-0 right-0 left-0 px-28 flex justify-between items-center text-slate-800 bg-white shadow-xl nav-height font">
+  <a routerLink="">
+    <img
+      class="w-auto logo-height"
+      src="assets/logo_01.png"
+      alt="logo">
+  </a>
+  <div class="columns-3 gap-5 w-auto text-center nav-height">
+    <div class="py-5 nav-height" routerLinkActive="border-b-4 bbc"><a routerLink="/home" routerLinkActive="link-active">Home</a></div>
+    <div class="py-5 nav-height" routerLinkActive="border-b-4 bbc"><a routerLink="/rooms" routerLinkActive="link-active">Rooms</a></div>
+    <div class="py-5 nav-height" routerLinkActive="border-b-4 bbc"><a routerLink="/reservations" routerLinkActive="link-active">Reservations</a></div>
+  </div>
 </nav>

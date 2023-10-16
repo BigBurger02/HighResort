@@ -1,0 +1,27 @@
+<div class="border rounded-2xl flex items-center mb-2 justify-between bg-gray-200">
+  <div class="w-[50%] box-border p-4">
+    <img src="https://localhost:7112/api/Image?roomId={{ inputStructuredRoom.room[0].id }}" alt="room_photo"
+         class="rounded-2xl">
+  </div>
+  <div class="w-[50%] box-border p-4">
+    <h2 class="mb-6 text-2xl text-center text-gray-600">{{ inputStructuredRoom.name }}</h2>
+    <div class="columns-2 gap-6 text-gray-700 text-md">
+      <div class="text-right">
+        <p>Capacity:</p>
+        <p>Price:</p>
+        <p>Free rooms:</p>
+      </div>
+      <div>
+        <p *ngIf="inputStructuredRoom.minCapacity != inputStructuredRoom.maxCapacity">{{ inputStructuredRoom.minCapacity }} - {{ inputStructuredRoom.maxCapacity }}</p>
+        <p *ngIf="inputStructuredRoom.minCapacity == inputStructuredRoom.maxCapacity">{{ inputStructuredRoom.minCapacity }}</p>
+        <p *ngIf="inputStructuredRoom.minPrice != inputStructuredRoom.maxPrice">
+          <span class="font-bold">{{ inputStructuredRoom.minPrice | currency:'USD':'symbol':'1.0-2' }} - {{ inputStructuredRoom.maxPrice | currency:'USD':'symbol':'1.0-2' }}</span>
+        </p>
+        <p *ngIf="inputStructuredRoom.minPrice == inputStructuredRoom.maxPrice">
+          <span class="font-bold">{{ inputStructuredRoom.minPrice | currency:'USD':'symbol':'1.0-2' }}</span>
+        </p>
+        <p>{{ inputStructuredRoom.room.length }}</p>
+      </div>
+    </div>
+  </div>
+</div>

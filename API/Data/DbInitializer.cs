@@ -15,30 +15,45 @@ public static class DbInitializer
 
         var rooms = new[]
         {
-            new Room { Id = 1, Name = "Cosy", Capacity = 4, Price = 500 },
-            new Room { Id = 2, Name = "Cosy", Capacity = 5, Price = 600 },
-            new Room { Id = 3, Name = "Cosy", Capacity = 4, Price = 500 },
-            new Room { Id = 4, Name = "Cream", Capacity = 4, Price = 400},
-            new Room { Id = 5, Name = "Cream", Capacity = 4, Price = 400 },
-            new Room { Id = 6, Name = "Cream", Capacity = 4, Price = 400 },
-            new Room { Id = 7, Name = "Light", Capacity = 2, Price = 250 },
-            new Room { Id = 8, Name = "Light", Capacity = 2, Price = 250 },
-            new Room { Id = 9, Name = "Light", Capacity = 2, Price = 250 },
-            new Room { Id = 10, Name = "Light", Capacity = 3, Price = 300 },
-            new Room { Id = 11, Name = "Minimalistic", Capacity = 2, Price = 400 },
-            new Room { Id = 12, Name = "Minimalistic", Capacity = 2, Price = 400 },
-            new Room { Id = 13, Name = "Minimalistic", Capacity = 2, Price = 400 },
-            new Room { Id = 14, Name = "Minimalistic", Capacity = 2, Price = 400 },
-            new Room { Id = 15, Name = "Minimalistic", Capacity = 2, Price = 400 },
-            new Room { Id = 16, Name = "OakForest", Capacity = 3, Price = 350 },
-            new Room { Id = 17, Name = "OakForest", Capacity = 3, Price = 350 },
-            new Room { Id = 18, Name = "OakForest", Capacity = 4, Price = 400 },
-            new Room { Id = 19, Name = "Panoramic", Capacity = 4, Price = 600 },
-            new Room { Id = 20, Name = "Panoramic", Capacity = 4, Price = 600 },
+            new Room { Id = 1, Name = "Cosy", Capacity = 4, Price = 500, ImageId = 1 },
+            new Room { Id = 2, Name = "Cosy", Capacity = 5, Price = 600, ImageId = 1 },
+            new Room { Id = 3, Name = "Cosy", Capacity = 4, Price = 500, ImageId = 1 },
+            new Room { Id = 4, Name = "Cream", Capacity = 4, Price = 400, ImageId = 2},
+            new Room { Id = 5, Name = "Cream", Capacity = 4, Price = 400, ImageId = 2 },
+            new Room { Id = 6, Name = "Cream", Capacity = 4, Price = 400, ImageId = 2 },
+            new Room { Id = 7, Name = "Light", Capacity = 2, Price = 250, ImageId = 3 },
+            new Room { Id = 8, Name = "Light", Capacity = 2, Price = 250, ImageId = 3 },
+            new Room { Id = 9, Name = "Light", Capacity = 2, Price = 250, ImageId = 3 },
+            new Room { Id = 10, Name = "Light", Capacity = 3, Price = 300, ImageId = 3 },
+            new Room { Id = 11, Name = "Minimalistic", Capacity = 2, Price = 400, ImageId = 4 },
+            new Room { Id = 12, Name = "Minimalistic", Capacity = 2, Price = 400, ImageId = 4 },
+            new Room { Id = 13, Name = "Minimalistic", Capacity = 2, Price = 400, ImageId = 4 },
+            new Room { Id = 14, Name = "Minimalistic", Capacity = 2, Price = 400, ImageId = 4 },
+            new Room { Id = 15, Name = "Minimalistic", Capacity = 2, Price = 400, ImageId = 4 },
+            new Room { Id = 16, Name = "OakForest", Capacity = 3, Price = 350, ImageId = 5 },
+            new Room { Id = 17, Name = "OakForest", Capacity = 3, Price = 350, ImageId = 5 },
+            new Room { Id = 18, Name = "OakForest", Capacity = 4, Price = 400, ImageId = 5 },
+            new Room { Id = 19, Name = "Panoramic", Capacity = 4, Price = 600, ImageId = 6 },
+            new Room { Id = 20, Name = "Panoramic", Capacity = 4, Price = 600, ImageId = 6 },
         };
         foreach (var item in rooms)
         {
             context.Room.Add(item);
+        }
+        context.SaveChanges();
+
+        var roomTypes = new[]
+        {
+            new RoomType() { Id = 1, Name = "Cosy" },
+            new RoomType() { Id = 2, Name = "Cream" },
+            new RoomType() { Id = 3, Name = "Light" },
+            new RoomType() { Id = 4, Name = "Minimalistic" },
+            new RoomType() { Id = 5, Name = "OakForest" },
+            new RoomType() { Id = 6, Name = "Panoramic" },
+        };
+        foreach (var item in roomTypes)
+        {
+            context.RoomType.Add(item);
         }
         context.SaveChanges();
 

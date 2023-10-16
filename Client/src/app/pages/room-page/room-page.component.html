@@ -1,8 +1,87 @@
-<h1 class="font-bold mb-2 text-center">{{ title }}</h1>
+<div class="flex pt-10">
+  <div class="w-1/4">
+    <div class="p-4 mx-4 text-md text-gray-700 bg-gray-200 rounded-2xl">
+      <h1 class="text-2xl text-center mb-4 text-gray-600">Search room:</h1>
 
-<p *ngIf="loading" class="text-center text-lg">Loading...</p>
+      <label>CheckIn Date:</label>
+      <input
+        type="date"
+        class="form-filter focus:ring-1 focus:ring-gray-400"
+        [(ngModel)]=formattedCheckIn
+        (ngModelChange)="checkInFilter=$event"
+      >
+      <label>CheckOut Date:</label>
+      <input
+        type="date"
+        class="form-filter focus:ring-1 focus:ring-gray-400"
+        [(ngModel)]=formattedCheckOut
+        (ngModelChange)="checkOutFilter=$event"
+      >
+      <label>Capacity:</label>
+      <input
+        type="number"
+        class="form-filter focus:ring-1 focus:ring-gray-400"
+        [(ngModel)]=capacityFilter
+      >
+      <label>Room type:</label>
+      <section class="mb-4 text-md text-gray-700">
+        <span class="">
+          <mat-checkbox class=""
+                        [checked]="allComplete"
+                        color="primary"
+                        [indeterminate]="someComplete()"
+                        (change)="setAll($event.checked)">
+            {{task.name}}
+          </mat-checkbox>
+        </span>
+        <span>
+          <ul class="pl-2">
+            <li *ngFor="let subtask of task.subtasks">
+              <mat-checkbox
+                        color="primary"
+                        [(ngModel)]="subtask.completed"
+                        (ngModelChange)="updateAllComplete()">
+                {{subtask.name}}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+      </section>
 
-<app-room
-  *ngFor="let room of roomsService.rooms"
-  [room]="room"
-></app-room>
+      <button
+        (click)="ngOnInit()"
+        type="submit"
+        class="w-full h-8 rounded-2xl bg-color text-center justify-center flex focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 focus-visible:outline-gray-500 hover:brightness-90"
+      >
+        <span class="my-auto text-gray-200">Search</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="w-1/2">
+    <div
+      *ngIf="roomToShow == -1"
+
+    >
+      <p *ngIf="loading" class="text-center text-lg">Loading...</p>
+
+      <app-specific-room
+        *ngFor="let room of roomsService.structuredRooms; let i = index"
+        [inputStructuredRoom]="room"
+        (click)="roomToShow = i"
+        class="hover:brightness-90"
+      ></app-specific-room>
+    </div>
+
+    <div
+      *ngIf="roomToShow != -1"
+    >
+      <app-specific-room
+        [inputStructuredRoom]="roomsService.structuredRooms[roomToShow]"
+      ></app-specific-room>
+    </div>
+  </div>
+
+  <div class="w-1/4">
+  </div>
+</div>

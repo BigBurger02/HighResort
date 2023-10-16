@@ -1,4 +1,4 @@
-export interface IRoom {
+export class Room {
   id: number
   name: string
   capacity: number
