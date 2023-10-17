@@ -5,6 +5,7 @@ import {FormsModule} from "@angular/forms";
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ThemePalette} from "@angular/material/core";
 import {CheckBox} from "../../models/CheckBox";
+import {Room} from "../../models/Room";
 
 @Component({
   selector: 'app-room-page',
@@ -50,7 +51,7 @@ export class RoomPageComponent {
     }
   }
 
-  constructor(public roomsService: RoomsService, private datePipe: DatePipe) {
+  constructor(public roomsService: RoomsService, public datePipe: DatePipe) {
     this.roomsService.getRoomTypes().subscribe(() => {
       for (let item of this.roomsService.roomNames) {
         this.task.subtasks?.push({name: item, completed: false})
@@ -75,7 +76,6 @@ export class RoomPageComponent {
         }
       })
     }
-    console.log('NAMES:', this.namesFilter)
 
     this.loading = true
     // this.rooms$ = this.roomsService.getAll().pipe(
@@ -85,7 +85,21 @@ export class RoomPageComponent {
     this.roomsService.getAll(this.checkInFilter, this.checkOutFilter, this.capacityFilter, this.namesFilter).subscribe(() => {
       this.loading = false
     })
+  }
 
+  filterDuplicates(rooms: Room[]): Room[] {
+    const filteredRooms: Room[] = [];
+    const seenRooms = new Set<string>();
+
+    for (const room of rooms) {
+      const roomKey = `${room.capacity}_${room.price}`;
+      if (!seenRooms.has(roomKey)) {
+        filteredRooms.push(room);
+        seenRooms.add(roomKey);
+      }
+    }
+
+    return filteredRooms;
   }
 
   // Room type MatCheckboxModule:

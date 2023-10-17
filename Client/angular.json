@@ -31,7 +31,6 @@
             ],
             "styles": [
               "src/styles.scss",
-              "deeppurple-amber.css"
             ],
             "scripts": []
           },

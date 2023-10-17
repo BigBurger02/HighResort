@@ -24,14 +24,14 @@
         [(ngModel)]=capacityFilter
       >
       <label>Room type:</label>
-      <section class="mb-4 text-md text-gray-700">
+      <section class="mb-4 text-md">
         <span class="">
-          <mat-checkbox class=""
+          <mat-checkbox
                         [checked]="allComplete"
                         color="primary"
                         [indeterminate]="someComplete()"
                         (change)="setAll($event.checked)">
-            {{task.name}}
+            <p class="text-gray-700">{{task.name}}</p>
           </mat-checkbox>
         </span>
         <span>
@@ -41,7 +41,7 @@
                         color="primary"
                         [(ngModel)]="subtask.completed"
                         (ngModelChange)="updateAllComplete()">
-                {{subtask.name}}
+                <p class="text-gray-700">{{subtask.name}}</p>
               </mat-checkbox>
             </li>
           </ul>
@@ -61,9 +61,13 @@
   <div class="w-1/2">
     <div
       *ngIf="roomToShow == -1"
-
     >
       <p *ngIf="loading" class="text-center text-lg">Loading...</p>
+
+      <h3
+        *ngIf="!loading && roomsService.structuredRooms.length == 0"
+        class="text-2xl text-center text-gray-600"
+      >Nothing found</h3>
 
       <app-specific-room
         *ngFor="let room of roomsService.structuredRooms; let i = index"
@@ -76,9 +80,35 @@
     <div
       *ngIf="roomToShow != -1"
     >
+      <div>
+        <div
+          (click)="roomToShow = -1"
+          class="flex bg-gray-200 rounded-2xl mb-4 p-1 text-gray-600 w-min hover:brightness-90 cursor-default"
+        >
+          <span class="material-symbols-outlined">
+            arrow_back
+          </span>
+          <p class="pr-2">Back</p>
+        </div>
+      </div>
+
       <app-specific-room
         [inputStructuredRoom]="roomsService.structuredRooms[roomToShow]"
       ></app-specific-room>
+
+      <div
+        *ngFor="let room of filterDuplicates(roomsService.structuredRooms[roomToShow].room)"
+        class="rounded-full flex items-center mb-2 justify-between bg-gray-200 text-gray-600 p-2 pl-4 text-xl"
+      >
+        <div>Capacity: {{ room.capacity }}</div>
+        <div>Price: {{ room.price }}</div>
+        <div>Dates: {{ datePipe.transform(checkInFilter, 'dd.MM.yyyy') }} - {{ datePipe.transform(checkOutFilter, 'dd.MM.yyyy') }}</div>
+        <div
+
+          class="bg-gray-400 rounded-full text-gray-200 py-1 px-2 cursor-default"
+        >Book</div>
+
+      </div>
     </div>
   </div>
 
