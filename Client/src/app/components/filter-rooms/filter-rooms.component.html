@@ -1,0 +1,56 @@
+<div class="p-4 mx-4 text-md text-gray-700 bg-gray-200 rounded-2xl">
+  <h1 class="text-2xl text-center mb-4 text-gray-600">Search room:</h1>
+
+  <label>CheckIn Date:</label>
+  <input
+    type="date"
+    class="form-filter focus:ring-1 focus:ring-gray-400"
+    [(ngModel)]=formattedCheckIn
+    (ngModelChange)="filter.checkInFilter=$event"
+  >
+  <label>CheckOut Date:</label>
+  <input
+    type="date"
+    class="form-filter focus:ring-1 focus:ring-gray-400"
+    [(ngModel)]=formattedCheckOut
+    (ngModelChange)="filter.checkOutFilter=$event"
+  >
+  <label>Capacity:</label>
+  <input
+    type="number"
+    class="form-filter focus:ring-1 focus:ring-gray-400"
+    [(ngModel)]=filter.capacityFilter
+  >
+  <label>Room type:</label>
+  <section class="mb-4 text-md">
+        <span class="">
+          <mat-checkbox
+            [checked]="allComplete"
+            color="primary"
+            [indeterminate]="someComplete()"
+            (change)="setAll($event.checked)">
+            <p class="text-gray-700">{{task.name}}</p>
+          </mat-checkbox>
+        </span>
+    <span>
+          <ul class="pl-2">
+            <li *ngFor="let subtask of task.subtasks">
+              <mat-checkbox
+                color="primary"
+                [(ngModel)]="subtask.completed"
+                (ngModelChange)="updateAllComplete()">
+                <p class="text-gray-700">{{subtask.name}}</p>
+              </mat-checkbox>
+            </li>
+          </ul>
+        </span>
+  </section>
+
+  <button
+    (click)="emitData()"
+    type="submit"
+    class="w-full h-8 rounded-2xl bg-color text-center justify-center flex focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 focus-visible:outline-gray-500 hover:brightness-90"
+  >
+    <span class="my-auto text-gray-200">Search</span>
+  </button>
+</div>

@@ -13,4 +13,5 @@ public class Reservations
     public Decimal TotalPrice { get; set; }
     public bool ReservationCanceled { get; set; }
     public bool ReservationPaid { get; set; }
+    public bool Processing { get; set; }
 }

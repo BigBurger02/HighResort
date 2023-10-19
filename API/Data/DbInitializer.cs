@@ -70,6 +70,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -82,6 +83,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -94,6 +96,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -106,6 +109,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -118,6 +122,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -130,6 +135,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -142,6 +148,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -154,6 +161,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -166,6 +174,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -178,6 +187,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -190,6 +200,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -202,6 +213,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -214,6 +226,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -226,6 +239,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -238,6 +252,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -250,6 +265,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -262,6 +278,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -274,6 +291,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -286,6 +304,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -298,6 +317,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
             new Reservations
             {
@@ -310,6 +330,7 @@ public static class DbInitializer
                 TotalPrice = 200, 
                 ReservationCanceled = false,
                 ReservationPaid = true,
+                Processing = false
             },
         };
         foreach (var item in reservations)

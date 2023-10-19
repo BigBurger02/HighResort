@@ -38,6 +38,7 @@ public class CustomRepository : ICustomRepository
             !_context.Reservations.Any(r =>
                 room.Id == r.RoomId &&
                 (
+                    // Rooms that doesn't fit:
                     (r.CheckInDate >= checkIn && r.CheckOutDate <= checkOut) ||
                     (r.CheckInDate <= checkIn && r.CheckOutDate >= checkOut) ||
                     (checkIn >= r.CheckInDate && checkIn < r.CheckOutDate) ||

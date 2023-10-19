@@ -1,69 +1,20 @@
 <div class="flex pt-10">
   <div class="w-1/4">
-    <div class="p-4 mx-4 text-md text-gray-700 bg-gray-200 rounded-2xl">
-      <h1 class="text-2xl text-center mb-4 text-gray-600">Search room:</h1>
-
-      <label>CheckIn Date:</label>
-      <input
-        type="date"
-        class="form-filter focus:ring-1 focus:ring-gray-400"
-        [(ngModel)]=formattedCheckIn
-        (ngModelChange)="checkInFilter=$event"
-      >
-      <label>CheckOut Date:</label>
-      <input
-        type="date"
-        class="form-filter focus:ring-1 focus:ring-gray-400"
-        [(ngModel)]=formattedCheckOut
-        (ngModelChange)="checkOutFilter=$event"
-      >
-      <label>Capacity:</label>
-      <input
-        type="number"
-        class="form-filter focus:ring-1 focus:ring-gray-400"
-        [(ngModel)]=capacityFilter
-      >
-      <label>Room type:</label>
-      <section class="mb-4 text-md text-gray-700">
-        <span class="">
-          <mat-checkbox class=""
-                        [checked]="allComplete"
-                        color="primary"
-                        [indeterminate]="someComplete()"
-                        (change)="setAll($event.checked)">
-            {{task.name}}
-          </mat-checkbox>
-        </span>
-        <span>
-          <ul class="pl-2">
-            <li *ngFor="let subtask of task.subtasks">
-              <mat-checkbox
-                        color="primary"
-                        [(ngModel)]="subtask.completed"
-                        (ngModelChange)="updateAllComplete()">
-                {{subtask.name}}
-              </mat-checkbox>
-            </li>
-          </ul>
-        </span>
-      </section>
-
-      <button
-        (click)="ngOnInit()"
-        type="submit"
-        class="w-full h-8 rounded-2xl bg-color text-center justify-center flex focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 focus-visible:outline-gray-500 hover:brightness-90"
-      >
-        <span class="my-auto text-gray-200">Search</span>
-      </button>
-    </div>
+    <app-filter-rooms
+      (submitEvent)="handleFilterData($event)"
+    ></app-filter-rooms>
   </div>
 
   <div class="w-1/2">
     <div
       *ngIf="roomToShow == -1"
-
     >
       <p *ngIf="loading" class="text-center text-lg">Loading...</p>
+
+      <h3
+        *ngIf="!loading && roomsService.structuredRooms.length == 0"
+        class="text-2xl text-center text-gray-600"
+      >Nothing found</h3>
 
       <app-specific-room
         *ngFor="let room of roomsService.structuredRooms; let i = index"
@@ -76,9 +27,35 @@
     <div
       *ngIf="roomToShow != -1"
     >
+      <div>
+        <div
+          (click)="roomToShow = -1"
+          class="flex bg-gray-200 rounded-2xl mb-4 p-1 text-gray-600 w-min hover:brightness-90 cursor-default"
+        >
+          <span class="material-symbols-outlined">
+            arrow_back
+          </span>
+          <p class="pr-2">Back</p>
+        </div>
+      </div>
+
       <app-specific-room
         [inputStructuredRoom]="roomsService.structuredRooms[roomToShow]"
       ></app-specific-room>
+
+      <div
+        *ngFor="let room of filterDuplicates(roomsService.structuredRooms[roomToShow].room)"
+        class="rounded-full flex items-center mb-2 justify-between bg-gray-200 text-gray-600 p-2 pl-4 text-xl"
+      >
+        <div>Capacity: {{ room.capacity }}</div>
+        <div>Price: {{ room.price }}</div>
+        <div>Dates: {{ datePipe.transform(filterData.checkInFilter, 'dd.MM.yyyy') }} - {{ datePipe.transform(filterData.checkOutFilter, 'dd.MM.yyyy') }}</div>
+        <div
+          (click)="reservationRedirect(datePipe.transform(filterData.checkInFilter, 'MM.dd.yyyy'), datePipe.transform(filterData.checkOutFilter, 'MM.dd.yyyy'), room.id)"
+          class="bg-gray-400 rounded-full text-gray-200 py-1 px-2 cursor-default hover:brightness-90"
+        >Book</div>
+
+      </div>
     </div>
   </div>
 
