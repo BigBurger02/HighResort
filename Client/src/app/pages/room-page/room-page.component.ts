@@ -5,6 +5,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {Room} from "../../models/Room";
 import {FilterRoomsComponent} from "../../components/filter-rooms/filter-rooms.component"
 import {FilterRooms} from "../../models/FilterRooms";
+import { Router } from "@angular/router"
+import {ErrorService} from "../../services/error.service";
 
 @Component({
   selector: 'app-room-page',
@@ -22,7 +24,9 @@ export class RoomPageComponent {
 
   constructor(
     public roomsService: RoomsService,
-    public datePipe: DatePipe
+    public datePipe: DatePipe,
+    private router: Router,
+    private errorService: ErrorService,
   ) { }
 
   ngOnInit(): void {
@@ -51,8 +55,18 @@ export class RoomPageComponent {
     return filteredRooms;
   }
 
-  handleChildData(data: FilterRooms) {
+  handleFilterData(data: FilterRooms) {
     this.filterData = data;
     this.ngOnInit()
+  }
+
+  reservationRedirect(checkIn: string | null, checkOut: string | null, roomId: number) {
+    if (checkIn == null || checkOut == null || roomId == 0) {
+      console.log('Wrong data while redirection:', checkIn, checkOut, roomId)
+      this.errorService.handle('Some problem. Wrong data')
+    }
+    else {
+      this.router.navigate(['/reservation', checkIn, checkOut, roomId]);
+    }
   }
 }

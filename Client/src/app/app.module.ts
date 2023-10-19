@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { GlobalErrorComponent } from './components/global-error/global-error.component';
 import { RoomPageComponent } from './pages/room-page/room-page.component';
-import { ReservationsPageComponent } from './pages/reservations-page/reservations-page.component';
+import { ReservationPageComponent } from './pages/reservation-page/reservation-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -21,7 +21,7 @@ import { FilterRoomsComponent } from './components/filter-rooms/filter-rooms.com
     AppComponent,
     GlobalErrorComponent,
     RoomPageComponent,
-    ReservationsPageComponent,
+    ReservationPageComponent,
     HomeComponent,
     NavigationComponent,
     NotFoundComponent,

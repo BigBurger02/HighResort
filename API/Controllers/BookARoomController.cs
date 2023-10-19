@@ -63,11 +63,12 @@ public class BookARoomController : ControllerBase
             TotalPrice = totalPrice,
             ReservationCanceled = false,
             ReservationPaid = false,
+            Processing = true,
         };
         
         _reservationCrudGenericRepository.CreateAsync(newReservation);
         _unitOfWork.CommitAsync();
 
-        return new ObjectResult(null) { StatusCode = 201 };
+        return new ObjectResult(newReservation.Id.ToString()) { StatusCode = 201 };
     }
 }

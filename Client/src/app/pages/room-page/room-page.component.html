@@ -1,7 +1,7 @@
 <div class="flex pt-10">
   <div class="w-1/4">
     <app-filter-rooms
-      (submitEvent)="handleChildData($event)"
+      (submitEvent)="handleFilterData($event)"
     ></app-filter-rooms>
   </div>
 
@@ -51,7 +51,7 @@
         <div>Price: {{ room.price }}</div>
         <div>Dates: {{ datePipe.transform(filterData.checkInFilter, 'dd.MM.yyyy') }} - {{ datePipe.transform(filterData.checkOutFilter, 'dd.MM.yyyy') }}</div>
         <div
-
+          (click)="reservationRedirect(datePipe.transform(filterData.checkInFilter, 'MM.dd.yyyy'), datePipe.transform(filterData.checkOutFilter, 'MM.dd.yyyy'), room.id)"
           class="bg-gray-400 rounded-full text-gray-200 py-1 px-2 cursor-default hover:brightness-90"
         >Book</div>
 
