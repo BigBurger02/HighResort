@@ -1,61 +1,8 @@
 <div class="flex pt-10">
   <div class="w-1/4">
-    <div class="p-4 mx-4 text-md text-gray-700 bg-gray-200 rounded-2xl">
-      <h1 class="text-2xl text-center mb-4 text-gray-600">Search room:</h1>
-
-      <label>CheckIn Date:</label>
-      <input
-        type="date"
-        class="form-filter focus:ring-1 focus:ring-gray-400"
-        [(ngModel)]=formattedCheckIn
-        (ngModelChange)="checkInFilter=$event"
-      >
-      <label>CheckOut Date:</label>
-      <input
-        type="date"
-        class="form-filter focus:ring-1 focus:ring-gray-400"
-        [(ngModel)]=formattedCheckOut
-        (ngModelChange)="checkOutFilter=$event"
-      >
-      <label>Capacity:</label>
-      <input
-        type="number"
-        class="form-filter focus:ring-1 focus:ring-gray-400"
-        [(ngModel)]=capacityFilter
-      >
-      <label>Room type:</label>
-      <section class="mb-4 text-md">
-        <span class="">
-          <mat-checkbox
-                        [checked]="allComplete"
-                        color="primary"
-                        [indeterminate]="someComplete()"
-                        (change)="setAll($event.checked)">
-            <p class="text-gray-700">{{task.name}}</p>
-          </mat-checkbox>
-        </span>
-        <span>
-          <ul class="pl-2">
-            <li *ngFor="let subtask of task.subtasks">
-              <mat-checkbox
-                        color="primary"
-                        [(ngModel)]="subtask.completed"
-                        (ngModelChange)="updateAllComplete()">
-                <p class="text-gray-700">{{subtask.name}}</p>
-              </mat-checkbox>
-            </li>
-          </ul>
-        </span>
-      </section>
-
-      <button
-        (click)="ngOnInit()"
-        type="submit"
-        class="w-full h-8 rounded-2xl bg-color text-center justify-center flex focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-0 focus-visible:outline-gray-500 hover:brightness-90"
-      >
-        <span class="my-auto text-gray-200">Search</span>
-      </button>
-    </div>
+    <app-filter-rooms
+      (submitEvent)="handleChildData($event)"
+    ></app-filter-rooms>
   </div>
 
   <div class="w-1/2">
@@ -102,10 +49,10 @@
       >
         <div>Capacity: {{ room.capacity }}</div>
         <div>Price: {{ room.price }}</div>
-        <div>Dates: {{ datePipe.transform(checkInFilter, 'dd.MM.yyyy') }} - {{ datePipe.transform(checkOutFilter, 'dd.MM.yyyy') }}</div>
+        <div>Dates: {{ datePipe.transform(filterData.checkInFilter, 'dd.MM.yyyy') }} - {{ datePipe.transform(filterData.checkOutFilter, 'dd.MM.yyyy') }}</div>
         <div
 
-          class="bg-gray-400 rounded-full text-gray-200 py-1 px-2 cursor-default"
+          class="bg-gray-400 rounded-full text-gray-200 py-1 px-2 cursor-default hover:brightness-90"
         >Book</div>
 
       </div>
